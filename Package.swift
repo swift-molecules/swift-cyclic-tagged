@@ -19,7 +19,7 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-molecules/swift-cyclic.git",
+            url: "https://github.com/swift-atoms/swift-cyclic.git",
             branch: "main"
         ),
         .package(
@@ -46,9 +46,10 @@ let package = Package(
                 "Cyclic Tagged",
                 .product(name: "Cyclic", package: "swift-cyclic"),
                 .product(
-                    name: "Cyclic Standard Library Integration",
+                    name: "Cyclic Test Support",
                     package: "swift-cyclic"
                 ),
+                .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Tagged", package: "swift-tagged"),
             ]
         ),

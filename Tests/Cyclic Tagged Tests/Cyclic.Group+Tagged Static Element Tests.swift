@@ -1,22 +1,17 @@
 import Testing
 
 import Cyclic
+import Cyclic_Test_Support
+import Cyclic_Tagged
+import Ordinal
 import Tagged
-@testable import Cyclic_Tagged
 
 private enum Slot {}
 
-extension Cyclic.Group {
-    @Suite
-    struct `Tagged Static Element Test` {
-        @Suite struct Unit {}
-        @Suite struct `Edge Case` {}
-        @Suite struct Integration {}
-        @Suite(.serialized) struct Performance {}
-    }
-}
+@Suite("Cyclic × Tagged")
+struct Cyclic_Tagged_Tests {}
 
-extension Cyclic.Group.`Tagged Static Element Test`.Unit {
+extension Cyclic_Tagged_Tests {
 
     @Test
     func `init from Element`() {
@@ -28,13 +23,13 @@ extension Cyclic.Group.`Tagged Static Element Test`.Unit {
     @Test
     func `init from Ordinal succeeds within bounds`() throws(Cyclic.Group.Static<5>.Element.Error) {
         let tagged: Tagged<Slot, Cyclic.Group.Static<5>.Element> = try .init(Ordinal(2))
-        #expect(tagged.underlying.position == 2)
+        #expect(tagged.underlying.position.rawValue == 2)
     }
 
     @Test
     func `init wrapping reduces position`() {
         let tagged: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(wrapping: Ordinal(7))
-        #expect(tagged.underlying.position == 2)
+        #expect(tagged.underlying.position.rawValue == 2)
     }
 
     @Test
@@ -46,7 +41,7 @@ extension Cyclic.Group.`Tagged Static Element Test`.Unit {
             Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(3))
         )
         let sum = a + b
-        #expect(sum.underlying.position == 2)
+        #expect(sum.underlying.position.rawValue == 2)
     }
 
     @Test
@@ -58,7 +53,7 @@ extension Cyclic.Group.`Tagged Static Element Test`.Unit {
             Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(3))
         )
         let diff = a - b
-        #expect(diff.underlying.position == 3)
+        #expect(diff.underlying.position.rawValue == 3)
     }
 
     @Test
@@ -70,7 +65,7 @@ extension Cyclic.Group.`Tagged Static Element Test`.Unit {
             Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(4))
         )
         a += b
-        #expect(a.underlying.position == 2)
+        #expect(a.underlying.position.rawValue == 2)
     }
 
     @Test
@@ -82,7 +77,7 @@ extension Cyclic.Group.`Tagged Static Element Test`.Unit {
             Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(1))
         )
         a -= b
-        #expect(a.underlying.position == 4)
+        #expect(a.underlying.position.rawValue == 4)
     }
 
     @Test
@@ -91,11 +86,11 @@ extension Cyclic.Group.`Tagged Static Element Test`.Unit {
             Cyclic.Group.Static<7>.Element(__unchecked: Ordinal(4))
         )
         let sum = a + a.inverse()
-        #expect(sum.underlying.position == 0)
+        #expect(sum.underlying.position.rawValue == 0)
     }
 }
 
-extension Cyclic.Group.`Tagged Static Element Test`.`Edge Case` {
+extension Cyclic_Tagged_Tests {
 
     @Test
     func `init from Ordinal throws out of bounds`() {
