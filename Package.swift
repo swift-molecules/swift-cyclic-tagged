@@ -36,6 +36,8 @@ let package = Package(
             name: "Cyclic Tagged",
             dependencies: [
                 .product(name: "Cyclic", package: "swift-cyclic"),
+                .product(name: "Cyclic Group Static", package: "swift-cyclic"),
+                .product(name: "Cyclic Group Static Element", package: "swift-cyclic"),
                 .product(name: "Tagged", package: "swift-tagged"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
             ]
@@ -45,6 +47,8 @@ let package = Package(
             dependencies: [
                 "Cyclic Tagged",
                 .product(name: "Cyclic", package: "swift-cyclic"),
+                .product(name: "Cyclic Group Static", package: "swift-cyclic"),
+                .product(name: "Cyclic Group Static Element", package: "swift-cyclic"),
                 .product(
                     name: "Cyclic Test Support",
                     package: "swift-cyclic"
